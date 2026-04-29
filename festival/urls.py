@@ -9,4 +9,5 @@ urlpatterns = [
     path('concertos/<int:concerto_id>/editar/', views.editar_concerto_view, name='editar_concerto'),
     path('concertos/<int:concerto_id>/apagar/', views.apagar_concerto_view, name='apagar_concerto'),
     path('concertos/novo/', views.novo_concerto_view, name='novo_concerto'),
+    path('palcos/<int:palco_id>/editar/', views.editar_palco_view, name='editar_palco'),
 ]

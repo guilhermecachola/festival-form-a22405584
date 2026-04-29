@@ -37,6 +37,20 @@ def novo_concerto_view(request):
 
     return render(request, 'festival/novo_concerto.html', {'form': form})
 
+def editar_palco_view(request, palco_id):
+    palco = get_object_or_404(Palco, id=palco_id)
+    
+    if request.method == 'POST':
+        # request.FILES é necessário por causa da imagem do palco
+        form = PalcoForm(request.POST, request.FILES, instance=palco)
+        if form.is_valid():
+            form.save()
+            return redirect('palcos')
+    else:
+        form = PalcoForm(instance=palco)
+        
+    return render(request, 'festival/editar_palco.html', {'form': form, 'palco': palco})
+    
 def palcos_view(request):
     palcos = Palco.objects.all() 
 
