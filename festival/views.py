@@ -13,6 +13,29 @@ def dias_view(request):
 
     return render(request, 'festival/dias.html', context)
 
+def apagar_concerto_view(request, concerto_id):
+    concerto = get_object_or_404(Concerto, id=concerto_id)
+    
+    if request.method == 'POST':
+        concerto.delete()
+        return redirect('dias')  
+    
+   
+    return redirect('concerto', concerto_id=concerto.id)
+
+def novo_concerto_view(request):
+    if request.method == 'POST':
+        form = ConcertoForm(request.POST)
+        if form.is_valid():
+            # Guarda o novo concerto na base de dados
+            novo_concerto = form.save()
+            # Redireciona para a página do concerto acabado de criar
+            return redirect('concerto', concerto_id=novo_concerto.id)
+    else:
+        # Se for um acesso normal, mostra o formulário vazio
+        form = ConcertoForm()
+
+    return render(request, 'festival/novo_concerto.html', {'form': form})
 
 def palcos_view(request):
     palcos = Palco.objects.all() 

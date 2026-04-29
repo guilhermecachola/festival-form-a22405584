@@ -1,0 +1,20 @@
+{% extends 'festival/layout.html' %}
+
+{% block content %}
+    <article class="card">
+        <h2>Agendar Novo Concerto</h2>
+        
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                {{ form.as_p }}
+            </div>
+            
+            <div style="margin-top: 20px;">
+                <button type="submit" class="btn">Criar Concerto</button>
+                <a href="{% url 'dias' %}" class="btn-cancel">Cancelar</a>
+            </div>
+        </form>
+    </article>
+{% endblock %}
